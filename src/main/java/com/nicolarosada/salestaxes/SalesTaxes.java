@@ -12,16 +12,25 @@ public class SalesTaxes {
 
     private final String inputShoppingBasket;
     private List<ShoppingItem> shoppingBasket;
+    private float totalTaxes;
+    private float totalPriceAfterTax;
 
     public SalesTaxes(String inputShoppingBasket) {
         this.inputShoppingBasket = inputShoppingBasket;
     }
 
     private void computeTaxes() {
+        // Read input
         shoppingBasket = new BasketParser(inputShoppingBasket).parse();
 
+        // Assign the category to the entries
         new CategoryRecognition(shoppingBasket).parse();
-        new TaxCalculator(shoppingBasket).parse();
+
+        // Compute taxes for every entry
+        TaxCalculator taxCalculator = new TaxCalculator(shoppingBasket);
+        taxCalculator.parse();
+        totalTaxes = taxCalculator.getTotalTaxes();
+        totalPriceAfterTax = taxCalculator.getTotalPriceAfterTax();
     }
 
     public String getReceipt() {

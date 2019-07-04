@@ -13,6 +13,9 @@ public class TaxCalculator extends ShoppingBasketParser {
     private static final float IMPORTED_TAX_RATE = 0.05f;
     private static final HashMap<ProductCategory, Float> CATEGORY_TAX_RATE = categoryTaxRateConstructor();
 
+    private float totalTaxes = 0.00f;
+    private float totalPriceAfterTax = 0.00f;
+
     public TaxCalculator(List<ShoppingItem> shoppingBasket) {
         super(shoppingBasket);
     }
@@ -27,10 +30,12 @@ public class TaxCalculator extends ShoppingBasketParser {
     }
 
     protected void apply(ShoppingItem shoppingItem) {
-        float totalTaxes = shoppingItem.getTotalPricePreTaxes() * computeTaxes(shoppingItem.getTaxCategory());
-        totalTaxes = Math.round(totalTaxes * 20.0f) / 20.0f;
+        float taxes = shoppingItem.getTotalPricePreTaxes() * computeTaxes(shoppingItem.getTaxCategory());
+        taxes = Math.round(taxes * 20.0f) / 20.0f;
+        shoppingItem.setTotalTaxes(taxes);
 
-        shoppingItem.setTotalTaxes(totalTaxes);
+        totalTaxes += shoppingItem.getTotalTaxes();
+        totalPriceAfterTax += shoppingItem.getTotalPriceAfterTaxes();
     }
 
     private float computeTaxes(TaxCategory taxCategory) {
@@ -40,5 +45,13 @@ public class TaxCalculator extends ShoppingBasketParser {
             taxRate += IMPORTED_TAX_RATE;
 
         return taxRate;
+    }
+
+    public float getTotalTaxes() {
+        return totalTaxes;
+    }
+
+    public float getTotalPriceAfterTax() {
+        return totalPriceAfterTax;
     }
 }
