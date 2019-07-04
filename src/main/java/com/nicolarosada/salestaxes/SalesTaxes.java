@@ -2,6 +2,7 @@ package com.nicolarosada.salestaxes;
 
 import com.nicolarosada.salestaxes.datamodel.NotCompliantItemException;
 import com.nicolarosada.salestaxes.datamodel.ShoppingItem;
+import com.nicolarosada.salestaxes.dictionaries.CategoryRecognition;
 import com.nicolarosada.salestaxes.parser.BasketParser;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class SalesTaxes {
 
     private void computeTaxes() {
         shoppingBasket = new BasketParser(inputShoppingBasket).parse();
+        new CategoryRecognition(shoppingBasket).parse();
+
+
     }
 
     public String getReceipt() {
