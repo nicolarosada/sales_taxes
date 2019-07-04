@@ -3,22 +3,17 @@ package com.nicolarosada.salestaxes.dictionaries;
 import com.nicolarosada.salestaxes.datamodel.ProductCategory;
 import com.nicolarosada.salestaxes.datamodel.ShoppingItem;
 import com.nicolarosada.salestaxes.datamodel.TaxCategory;
+import com.nicolarosada.salestaxes.parser.ShoppingBasketParser;
 
 import java.util.List;
 
-public class CategoryRecognition {
-
-    private final List<ShoppingItem> shoppingBasket;
+public class CategoryRecognition extends ShoppingBasketParser {
 
     public CategoryRecognition(List<ShoppingItem> shoppingBasket) {
-        this.shoppingBasket = shoppingBasket;
+        super(shoppingBasket);
     }
 
-    public void parse() {
-        shoppingBasket.forEach(this::applyCategory);
-    }
-
-    private void applyCategory(ShoppingItem shoppingItem) {
+    protected void apply(ShoppingItem shoppingItem) {
         TaxCategory taxCategory = new TaxCategory();
 
         if (shoppingItem
