@@ -1,7 +1,6 @@
 package com.nicolarosada.salestaxes.parser;
 
 import com.nicolarosada.salestaxes.SalesTaxes;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

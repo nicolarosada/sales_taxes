@@ -24,7 +24,7 @@ public class CategoryRecognition extends ShoppingBasketParser {
         }
 
         String[] words = shoppingItem.getName().toLowerCase().split(" ");
-        for (String word: words) {
+        for (String word : words) {
             ProductCategory wordCategory = SimpleDictionary.findCategory(word);//mapper
             if (wordCategory != ProductCategory.DEFAULT) {
                 taxCategory.setProductCategory(wordCategory);

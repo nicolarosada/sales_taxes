@@ -31,7 +31,7 @@ public class TaxCalculator extends ShoppingBasketParser {
 
     protected void apply(ShoppingItem shoppingItem) {
         float taxes = shoppingItem.getTotalPricePreTaxes() * computeTaxes(shoppingItem.getTaxCategory());
-        taxes = Math.round(taxes * 20.0f) / 20.0f;
+        taxes = (float) Math.ceil(taxes * 20.0f) / 20.0f;
         shoppingItem.setTotalTaxes(taxes);
 
         totalTaxes += shoppingItem.getTotalTaxes();

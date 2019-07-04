@@ -1,10 +1,7 @@
 package com.nicolarosada.salestaxes.parser;
 
 import com.nicolarosada.salestaxes.datamodel.NotCompliantItemException;
-import com.nicolarosada.salestaxes.datamodel.ProductCategory;
 import com.nicolarosada.salestaxes.datamodel.ShoppingItem;
-import com.nicolarosada.salestaxes.datamodel.TaxCategory;
-import com.nicolarosada.salestaxes.dictionaries.SimpleDictionary;
 
 public class LineParser {
 
@@ -57,6 +54,12 @@ public class LineParser {
     }
 
     private void parseName() {
+        int idx = partialLine.toLowerCase().indexOf("imported");
+        if (idx != -1) {
+            partialLine = partialLine.substring(0, idx).trim() + " " + partialLine.substring(idx + 8).trim();
+            partialLine = "imported " + partialLine.trim();
+        }
+
         shoppingItem.setName(partialLine);
     }
 

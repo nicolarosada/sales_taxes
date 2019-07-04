@@ -18,4 +18,8 @@ public abstract class ShoppingBasketParser {
     }
 
     protected abstract void apply(ShoppingItem shoppingItem);
+
+    public List<ShoppingItem> getShoppingBasket() {
+        return shoppingBasket;
+    }
 }
