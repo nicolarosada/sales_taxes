@@ -4,8 +4,9 @@ public class ShoppingItem {
 
     private int quantity;
     private String name;
-    private Float unitPrice;
+    private float unitPrice;
     private TaxCategory taxCategory;
+    private float totalTaxes;
 
     public int getQuantity() {
         return quantity;
@@ -23,11 +24,11 @@ public class ShoppingItem {
         this.name = name;
     }
 
-    public Float getUnitPrice() {
+    public float getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Float unitPrice) {
+    public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -37,5 +38,21 @@ public class ShoppingItem {
 
     public void setTaxCategory(TaxCategory taxCategory) {
         this.taxCategory = taxCategory;
+    }
+
+    public float getTotalTaxes() {
+        return totalTaxes;
+    }
+
+    public void setTotalTaxes(float totalTaxes) {
+        this.totalTaxes = totalTaxes;
+    }
+
+    public float getTotalPricePreTaxes() {
+        return quantity * unitPrice;
+    }
+
+    public float getTotalPriceAfterTaxes() {
+        return getTotalPricePreTaxes() + totalTaxes;
     }
 }

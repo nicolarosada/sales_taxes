@@ -5,18 +5,18 @@ import com.nicolarosada.salestaxes.datamodel.ProductCategory;
 import java.util.HashMap;
 
 public class SimpleDictionary {
-    private static final HashMap<String, ProductCategory> dictionary = SimpleDictionaryConstructor();
+    private static final HashMap<String, ProductCategory> dictionary = simpleDictionaryConstructor();
 
-    private static HashMap<String, ProductCategory> SimpleDictionaryConstructor() {
+    private static HashMap<String, ProductCategory> simpleDictionaryConstructor() {
         return new HashMap<String, ProductCategory>() {
             {
-                put("book", ProductCategory.BOOKS);
-                put("books", ProductCategory.BOOKS);
+                put("book", ProductCategory.EXEMPT);
+                put("books", ProductCategory.EXEMPT);
 
-                put("chocolate", ProductCategory.FOOD);
-                put("chocolates", ProductCategory.FOOD);
+                put("chocolate", ProductCategory.EXEMPT);
+                put("chocolates", ProductCategory.EXEMPT);
 
-                put("headache", ProductCategory.MEDICAL);
+                put("headache", ProductCategory.EXEMPT);
             }
         };
     }

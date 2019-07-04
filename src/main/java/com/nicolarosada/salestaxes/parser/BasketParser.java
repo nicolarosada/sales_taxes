@@ -18,8 +18,8 @@ public class BasketParser {
 
     public List<ShoppingItem> parse() {
         new BufferedReader(new StringReader(inputShoppingBasket))
-            .lines()
-            .forEach(this::parseLine);
+                .lines()
+                .forEach(this::parseLine);
 
         return shoppingBasket;
     }
@@ -27,8 +27,8 @@ public class BasketParser {
     private void parseLine(String line) {
 
         ShoppingItem item = new LineParser(line)
-            .parse()
-            .getShoppingItem();
+                .parse()
+                .getShoppingItem();
 
         shoppingBasket.add(item);
     }

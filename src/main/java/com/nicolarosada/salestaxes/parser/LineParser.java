@@ -1,10 +1,7 @@
 package com.nicolarosada.salestaxes.parser;
 
 import com.nicolarosada.salestaxes.datamodel.NotCompliantItemException;
-import com.nicolarosada.salestaxes.datamodel.ProductCategory;
 import com.nicolarosada.salestaxes.datamodel.ShoppingItem;
-import com.nicolarosada.salestaxes.datamodel.TaxCategory;
-import com.nicolarosada.salestaxes.dictionaries.SimpleDictionary;
 
 public class LineParser {
 
@@ -19,7 +16,6 @@ public class LineParser {
         parseQuantity();
         parseUnitPrice();
         parseName();
-        parseTaxCategory();
 
         return this;
     }
@@ -58,28 +54,13 @@ public class LineParser {
     }
 
     private void parseName() {
+        int idx = partialLine.toLowerCase().indexOf("imported");
+        if (idx != -1) {
+            partialLine = partialLine.substring(0, idx).trim() + " " + partialLine.substring(idx + 8).trim();
+            partialLine = "imported " + partialLine.trim();
+        }
+
         shoppingItem.setName(partialLine);
     }
 
-    private void parseTaxCategory() {
-        TaxCategory taxCategory = new TaxCategory();
-
-        if (shoppingItem
-            .getName()
-            .toLowerCase()
-            .contains("imported")) {
-            taxCategory.setImported(true);
-        }
-
-        String[] words = shoppingItem.getName().toLowerCase().split(" ");
-        for (String word: words) {
-            ProductCategory wordCategory = SimpleDictionary.findCategory(word);//mapper
-            if (wordCategory != ProductCategory.DEFAULT) {
-                taxCategory.setProductCategory(wordCategory);
-                break;
-            }
-        }
-
-        shoppingItem.setTaxCategory(taxCategory);
-    }
 }
